@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Machine Learning Model</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<header class="header">
+    <div class="top-row">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo1.png') }}" width="100" height="167" alt="Logo">
+        </div>
+        <span style="color: rgb(243, 244, 174); font-family:Georgia, 'Times New Roman', Times, serif; font-size: xx-large">
+            <p>Department of Information Technology <br/> National Institute of Technology Karnataka, Surathkal - 575025</p>
+            <strong>E</strong>nergy <strong>C</strong>onsumption <strong>P</strong>rediction using <strong>M</strong>achine <strong>L</strong>earning<br />
+            <p>By G Venkata Ravi Ram(211AI018) & Chudi Dhruv(211AI014) <br/> under guidance of Dr. Jaidhar C D<br/></p>
+        </span>
+    </div>
+</header>
+<body>
+        <div class="layout">
+        <div class="form-style-2">
+                <form action="/predict" method="post">
+                    {% for feature in features %}
+                        {% if loop.index % 6 == 1 %}
+                        <div class="row">
+                        {% endif %}
+                        <div class="input-container">
+                        <label>{{ feature }}:</label>
+                        <input type="number" name="{{ feature }}" step="0.01" value="{{ request.form[feature] }}">
+                        </div>
+                        {% if loop.index % 6 == 0 or loop.last %}
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                    <input type="submit" value="Predict">
+                </form>
+
+            </div>
+        </div>
+        {% if prediction %}
+            <p class="result" id="prediction">{{ prediction }}</p>
+        {% endif %}
+
+
+</body>
+
+<footer class="footer" id="footer">
+    <div class="contact-details">
+
+        <p style="text-align: center;">&copy; 2023 . All rights reserved.</p>
+    </div>
+</footer>
+</html>
